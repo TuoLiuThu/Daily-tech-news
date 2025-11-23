@@ -6,8 +6,11 @@ import pytz
 import re
 
 # ================= 配置区域 =================
-# 使用 gemini-2.0-flash (免费、支持搜索、上下文窗口大)
-MODEL_NAME = "gemini-2.0-flash"
+# 依据 2025 年 11 月官方文档：
+# 1.5-flash 已弃用
+# 3-pro 是付费模型
+# 2.5-flash 是当前的免费主力模型
+MODEL_NAME = "gemini-2.5-flash"
 API_KEY = os.environ.get("GEMINI_API_KEY")
 
 def get_beijing_time():
@@ -16,20 +19,19 @@ def get_beijing_time():
 
 def clean_html_content(text):
     """
-    清洗函数：移除 AI 的开场白，只提取 HTML 代码
+    清洗函数：强制移除 AI 的废话，只提取 HTML 代码
     """
+    # 1. 移除 Markdown 代码块标记
+    if "```" in text:
+        text = text.replace("```html", "").replace("```", "")
+    
+    # 2. 正则提取 <!DOCTYPE html> ... </html>
     pattern = r"<!DOCTYPE html>.*</html>"
     match = re.search(pattern, text, re.DOTALL)
     if match:
         return match.group(0)
     
-    # 如果没找到标准头，尝试找 markdown 代码块
-    if "```" in text:
-        clean_text = text.replace("```html", "").replace("```", "").strip()
-        if clean_text.startswith("<!DOCTYPE html>"):
-            return clean_text
-            
-    return text
+    return text.strip()
 
 def generate_report():
     current_time = get_beijing_time()
@@ -39,15 +41,16 @@ def generate_report():
     if not API_KEY:
         return "<html><body><h1>Error</h1><p>API Key is missing.</p></body></html>"
 
+    # 构造 REST API URL
     url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){MODEL_NAME}:generateContent?key={API_KEY}"
 
-    # ================= 核心 Prompt (完全植入你的四大板块要求) =================
+    # ================= 核心 Prompt (您的四大板块要求) =================
     system_prompt = f"""
     Time: {current_time}.
-    Role: You are an elite AI Industry Analyst & Full-stack Engineer.
+    Role: You are an elite AI Industry Analyst.
     Task: Search web for AI news (Past 24h) and generate a single-file HTML5 Dashboard.
 
-    【CRITICAL RULES】
+    【CRITICAL EXECUTION RULES】
     1. **NO CONVERSATIONAL TEXT**: Output ONLY raw HTML code. Start directly with `<!DOCTYPE html>`.
     2. **Real Links**: Must use Google Search tool to find real URLs.
     3. **Language**: Simplified Chinese.
@@ -98,11 +101,15 @@ def generate_report():
     Output ONLY the HTML string.
     """
 
+    # 构造请求体 (REST API 标准)
     payload = {
         "contents": [{"parts": [{"text": system_prompt}]}],
-        "tools": [{"googleSearch": {}}],
+        "tools": [
+            # 【关键修复】使用 REST API 标准的工具名 googleSearch (小驼峰)
+            {"googleSearch": {}} 
+        ],
         "generationConfig": {
-            "temperature": 0.5, # 稍微降低温度，让它更听话
+            "temperature": 0.5,
             "maxOutputTokens": 8192
         }
     }
@@ -112,25 +119,26 @@ def generate_report():
             url, 
             headers={'Content-Type': 'application/json'},
             data=json.dumps(payload),
-            timeout=180
+            timeout=180 # 增加超时，搜索需要时间
         )
         
         if response.status_code != 200:
-            print(f"API Error: {response.text}")
-            return f"<html><body><h1>API Error</h1><p>{response.text}</p></body></html>"
+            print(f"API Error Code: {response.status_code}")
+            print(f"API Error Body: {response.text}")
+            return f"<html><body><h1>API Error {response.status_code}</h1><p>{response.text}</p></body></html>"
 
         result = response.json()
         
         try:
             raw_text = result['candidates'][0]['content']['parts'][0]['text']
-            # 清洗数据
+            # 清洗数据，确保只返回 HTML
             final_html = clean_html_content(raw_text)
             return final_html
-            
         except (KeyError, IndexError):
-            return "<html><body><h1>Parsing Error</h1><p>API returned unexpected structure.</p></body></html>"
+            return "<html><body><h1>Parsing Error</h1><p>API valid but no content returned (Safe or Filtered).</p></body></html>"
 
     except Exception as e:
+        print(f"Network Exception: {e}")
         return f"<html><body><h1>Network Error</h1><p>{e}</p></body></html>"
 
 if __name__ == "__main__":

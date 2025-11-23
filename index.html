@@ -1,1 +1,109 @@
-<html><body><h1>Network Error</h1><p>No connection adapters were found for '[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/)gemini-2.5-flash:generateContent?key=AIzaSyDzQvO987d58ocJUaOMPn2pJ1rE6u8CYzM'</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Industry Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            background-color: #1f2937; /* gray-800 */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .sentiment-optimistic { color: #34d399; /* green-400 */ }
+        .sentiment-pessimistic { color: #ef4444; /* red-500 */ }
+        .sentiment-neutral { color: #9ca3af; /* gray-400 */ }
+        .source-link {
+            color: #60a5fa; /* blue-400 */
+            text-decoration: none;
+        }
+        .source-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-8 text-center text-blue-400">AI Industry Dashboard</h1>
+
+        <!-- Tech Leaders (领军人物动态) -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-300">领军人物动态 (Tech Leaders)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Greg Brockman -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Greg Brockman" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Greg Brockman</h3>
+                            <p class="text-gray-400">OpenAI Co-founder & President</p>
+                        </div>
+                    </div>
+                    <p class="mb-2"><strong>Latest Statement (Nov 20, 2025):</strong> Greg Brockman announced via Twitter that OpenAI's Codex training now incorporates Windows, promising substantial improvements in that ecosystem.</p>
+                    <p class="mb-2"><strong>Sentiment:</strong> <span class="sentiment-optimistic">Optimistic</span></p>
+                    <p class="mb-4"><strong>Analyst Take:</strong> This update for Codex, integrating Windows training, signifies OpenAI's commitment to expanding AI utility across diverse developer environments. By enhancing AI-assisted coding for a larger user base, it could accelerate software development cycles and foster innovation in Windows-dominated sectors. This move is crucial for broader AI adoption and cementing OpenAI's platform leadership.</p>
+                    <p><a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQELk3o7ZkLc9kFr1q2jeKFdvyMgIJIeDiQ5Z_AVUbv5WRS6BhLvttbm_HnQNKcVPsC4N3Kq32k50LTE4WKlcsvxthCMlw4cLT-dXsF13X5Wub3SyzciR5bL7s3tJOc9jVtfE1kTmeMm-EFREfQavrYuapzAyBbsQHWW7_R9mTBbesqCuRCfYnhGJklgGekj3GtwFOJf0jjAaZnLalIL1GOo1kBwqS_MYqQDTab0xhvPAl2ijpXXBAgiWT43B_c" target="_blank" class="source-link">[Source]</a></p>
+                </div>
+
+                <!-- Yann LeCun -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Yann LeCun" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Yann LeCun</h3>
+                            <p class="text-gray-400">Former Meta Chief AI Scientist</p>
+                        </div>
+                    </div>
+                    <p class="mb-2"><strong>Latest Statement (Nov 20, 2025):</strong> Yann LeCun confirmed he is leaving Meta at the end of 2025 to launch a new AI startup. His venture will focus on "Advanced Machine Intelligence" and developing AI systems that understand the physical world, have persistent memory, can reason, and plan complex action sequences.</p>
+                    <p class="mb-2"><strong>Sentiment:</strong> <span class="sentiment-optimistic">Optimistic (for his venture)</span></p>
+                    <p class="mb-4"><strong>Analyst Take:</strong> LeCun's departure from Meta to pursue a startup focused on "world models" and advanced machine intelligence signals a potential shift in foundational AI research. His emphasis on systems that understand the physical world and possess persistent memory could pave a new path beyond current LLM limitations, potentially leading to more robust and generalizable AI, but also highlights Meta's internal strategic divergence.</p>
+                    <p><a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEAvgU8ll3WF2KNa-Z37CKT9WaefI4dfu9tNGem9gyOtjkEcioKdblqH9Mcpgp_4FRUWbBH6HIf3kMDZLe7DnnLE7986kcuGvegnQMXGNv3aMlJ43g3zNmn_SwzL6xb9sLFLDhQpY2EyIq_c48CISa99jjSiXl-UozvfrqfoWyNPvPJVmE5p_kSDvRn1tCozK-Asx_Bo6j6iljTRVua4To_Q9oekxydTuYcX__q4w==" target="_blank" class="source-link">[Source]</a></p>
+                </div>
+
+                <!-- Dario Amodei -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Dario Amodei" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Dario Amodei</h3>
+                            <p class="text-gray-400">Anthropic CEO</p>
+                        </div>
+                    </div>
+                    <p class="mb-2"><strong>Latest Statement (Nov 19-20, 2025):</strong> Dario Amodei reiterated his warning that AI could displace nearly half of entry-level white-collar roles within five years, potentially pushing unemployment to 10-20%. He also expressed deep discomfort with the concentration of power among a few tech CEOs in shaping AI's future.</p>
+                    <p class="mb-2"><strong>Sentiment:</strong> <span class="sentiment-pessimistic">Pessimistic</span></p>
+                    <p class="mb-4"><strong>Analyst Take:</strong> Amodei's repeated warnings underscore growing concerns about AI's societal impact, particularly on employment and governance. His focus on rapid job displacement highlights the urgent need for policy interventions and reskilling initiatives. The critique of concentrated AI power suggests a call for broader stakeholder involvement in ethical AI development and deployment.</p>
+                    <p><a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHzlwzFkY85W5MGbbTrA6COMqJTlxtTKqS01kfiVRrBQp2qRZRuhjtICOTVIh2gYtNX3IWdRfLrM2xMSKep3kAK_ILHEfiNjCtGP5QHMPBqiS-r7lcdXtVFInNV6xlj3EC8xsE_fH_xGGNL62sueMue0wHLj_OW7XvflB-3S-eswLF12oxYJGN-Qfb8bJe0PRsWx3Knm0tcYwOPyZNmmc1g_DjcJG27zjAfnnP2ah4WX17nWGv6YUbiQp80kK2FG2Mv6TjnFS-Co5Y=" target="_blank" class="source-link">[Source]</a></p>
+                </div>
+
+                <!-- Ilya Sutskever -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Ilya Sutskever" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Ilya Sutskever</h3>
+                            <p class="text-gray-400">Safe Superintelligence Inc. CEO</p>
+                        </div>
+                    </div>
+                    <p class="mb-2"><strong>Latest Statement (Nov 19, 2025):</strong> Ilya Sutskever, now CEO of Safe Superintelligence Inc. (SSI), stated, "We have the compute, we have the team, and we know what to do." This reaffirms SSI's commitment to building safe superintelligence independently.</p>
+                    <p class="mb-2"><strong>Sentiment:</strong> <span class="sentiment-optimistic">Optimistic</span></p>
+                    <p class="mb-4"><strong>Analyst Take:</strong> Sutskever's confident statement reflects SSI's focused approach to AGI safety and development, emphasizing internal resources and clear direction. His leadership, post-OpenAI, signals a dedicated effort to build superintelligence with a strong safety-first ethos, potentially setting a new standard for responsible AI scaling outside the pressures of commercial product cycles.</p>
+                    <p><a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFEUk074BuUKPM8pYE8tLuz0QtOr5KZNXXU2IHVoVi2yY1JZfirhgOZbwCVZsexWBVcXK1eW2mIYCf7WtaHyvOFH4Gm4cKXiyrVsf9OoCgsO2yuIgSifpYDpgDCplUfa7EfE-2MVfz32IdmJBcVmsnxOGCl4mJGKINx4J1b1vjgHx6YjiDlN7CgrT1akAy2lXJck-Vexr-jpQ6nRM98nTin5HI=" target="_blank" class="source-link">[Source]</a></p>
+                </div>
+
+                <!-- Demis Hassabis -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://via.placeholder.com/60" alt="Demis Hassabis" class="rounded-full mr-4">
+                        <div>
+                            <h3 class="text-xl font-bold">Demis Hassabis</h3>
+                            <p class="text-gray-400">DeepMind CEO</p>
+                        </div>
+                    </div>
+                    <p class="mb-2"><strong>Latest Statement:</strong> No public updates in the last 48h.</p>
+                    <p class="mb-2"><strong>Sentiment:</strong> <span class="sentiment-neutral">Neutral</span></p>

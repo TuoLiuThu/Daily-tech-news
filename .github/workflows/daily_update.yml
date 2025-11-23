@@ -2,8 +2,8 @@ name: Daily AI Report Update
 
 on:
   schedule:
-    - cron: '0 16 * * *' # 北京时间 00:00 运行
-  workflow_dispatch:     # 允许手动点击运行
+    - cron: '0 16 * * *' # 北京时间 00:00
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -35,6 +35,5 @@ jobs:
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
         git add index.html
-        # 强制提交，即使文件没变也尝试更新时间戳
         git commit -m "Update Daily Report" || echo "No changes to commit"
         git push

@@ -1,44 +1,137 @@
-<html><body><h1>API Error 429</h1><p>{
-  "error": {
-    "code": 429,
-    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash-exp\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash-exp\nPlease retry in 38.778353589s.",
-    "status": "RESOURCE_EXHAUSTED",
-    "details": [
-      {
-        "@type": "type.googleapis.com/google.rpc.Help",
-        "links": [
-          {
-            "description": "Learn more about Gemini API quotas",
-            "url": "https://ai.google.dev/gemini-api/docs/rate-limits"
-          }
-        ]
-      },
-      {
-        "@type": "type.googleapis.com/google.rpc.QuotaFailure",
-        "violations": [
-          {
-            "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
-            "quotaId": "GenerateRequestsPerMinutePerProjectPerModel-FreeTier",
-            "quotaDimensions": {
-              "model": "gemini-2.0-flash-exp",
-              "location": "global"
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 新闻仪表盘</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 深色模式
+        document.documentElement.classList.add('dark');
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
             }
-          },
-          {
-            "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count",
-            "quotaId": "GenerateContentInputTokensPerModelPerMinute-FreeTier",
-            "quotaDimensions": {
-              "location": "global",
-              "model": "gemini-2.0-flash-exp"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-          }
-        ]
-      },
-      {
-        "@type": "type.googleapis.com/google.rpc.RetryInfo",
-        "retryDelay": "38s"
-      }
-    ]
-  }
-}
-</p></body></html>
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</head>
+
+<body class="bg-slate-900 text-white font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4 text-center">AI 最新动态 (过去24小时)</h1>
+
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'DeepMind')">DeepMind</button>
+            <button class="tablinks" onclick="openTab(event, 'OpenAI')">OpenAI</button>
+            <button class="tablinks" onclick="openTab(event, 'Meta')">Meta</button>
+            <button class="tablinks" onclick="openTab(event, 'Anthropic')">Anthropic</button>
+        </div>
+
+        <div id="DeepMind" class="tabcontent" style="display:block;">
+            <h2 class="text-2xl font-semibold mt-4 mb-2">DeepMind (Demis Hassabis, Jeff Dean)</h2>
+            <ul>
+                <li>
+                    <p>Google DeepMind正在新加坡开设一个新的AI研究实验室，该实验室将专注于与亚洲各国政府、企业和学术机构的合作。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHX7es_6CZ1PAc8BGeCvqPh5biNBzumNGXP-ge4suTobRU4bo3Wk0sOuWi16yFEG9GuWEKJPfq19Kx6RhtkBbJX7fhtboHqy5cVGzUtHLCHoE-Fmpy0wyaW1aoMw-Ts3Stx-vpURbLcW1-UVC0xftOsLBF9hCeSDF1mcIvDDMCRywZzZW3xdgykrdrMOdJgbVndgK8SZz0CX427CmyGrEnqcIn8-yh5IOdDxgw8kScqnk0VJdfJep-z-2h_eZs3THoi6mA4jdA="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Jeff Dean认为，AI模型可能已经在大多数日常任务中超越了人类的能力。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZNGx60PFLWHMjOmPaOuLgJ1mKYu1fpAqsJpO0wGZD-18Ujqj-J0pgj9JJN1mZKMI5hXtvVzlUEnROvsKFBHPflk70z9MWMA3QpxloEOlZnLGIZogu_N6Y85YESzNoBCL3FrCLSt-vWVNJACwNpFoUo5D89CzD0KYJu7dODFxGD06Mjy_NXZS3jB-lgWw0NEK8gP0oHgJSDE-w6R6h1Aj3WZQ-ZqBeqgrVzCWNi0XpwwrO-b1Sull8QmoeynmdCXhGyhWRSF6_pNQZga32mr6d3RGz5RM="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Demis Hassabis表示，未来的Google AI工具可能包括“整个互联网的记忆”。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtIX1YVEBn2f5vsBXQlVHIrbpRSGIKtDClXlXDYDfPlclPuVJZ8ZFt7m5eRMDrXhGFSTs4vaS5e-uZJUIz8N9TXgZlQKsLSLYSih8KMucykolVkFXhxcQlFDhhmvJDF-Dka2MqJcC-OUsDwFDU"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Demis Hassabis透露，Gemini 3.0性能背后的“真正秘密”是世界一流的研究、工程和基础设施协同工作。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHu_uCHfg7quj-aDMuyISfqzACS45kY21lc4p1O5IViOHWmZDsZTcYldxyUIbunvIVUnTKR8I1eBguvfvN8eoWg25fEo3IqmtwV32BthfdfhhpdK96a7_MwgSKGTz2BJqTinNCTOzUzYDwN3MJKFpr1EuYf3gcCoD8r-So_RcBQJbNaytz6F0kvcnwtdLjv-8woi8-2emtBN1GBUgb7Pbx_YSLqrxRPwyfidBulMYxnhh_Jiag7SJhqkAxwRU_C8W89FyvFu8_iDWBK-KAklJqVbQ-Z5CYtGS4XG0T90jXssaH8Vxo="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>尽管OpenAI在推理模型方面进行了战略转移，但Google展示了预训练仍然具有相当大的潜力。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGfNiUlOADKIWhWhB1NTpWL1aulNZ0-REVtTtriSj1EFk_a79iwC6Jc_n6Dw3_AfVX-wtYO8uXUAtSNffbAb92Zm7FwRR_cGX1eke6bLrOqOTsyvx_Jh5UDFRQ-MDP_yFWWXD7N5wSs"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="OpenAI" class="tabcontent">
+            <h2 class="text-2xl font-semibold mt-4 mb-2">OpenAI (Sam Altman, Greg Brockman)</h2>
+            <ul>
+                <li>
+                    <p>Sam Altman和Greg Brockman在被董事会解雇后表示震惊和悲伤。格雷格·布罗克曼详细介绍了事件的经过。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHyn3hel3f4HYcdTSPHhCGdRYn-aKwp4qYL-vM6M1oJhRPqXGdOOy9H2ZY6lPzjUO2uReUenrkPVf-7lMFXMZM9aXzUJp2n8Muq645iTMtJbqzLFkpZRWw5WHwY8wN8zJ1OWMPTPXn7KGB9UNp8420ZhN370_HwDNKxKiCNkNmsVzREuOXWj4ieysDLOgRJ_sVolzrO8lQy0GS_U7dzbJ8wbPRB72YIPTLWTItrnx5Re1_F8b_6W27vlGdzwKQQRz1b4G32EJhq1b5dpDo_9uipnwc-_q9j"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Greg Brockman在离开总裁职位三个月后重返OpenAI。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHKRGVHEJJ1183TZHA8AlnL45TyydGYIxr5iuQq1AyeXKTyVvwZ4A4LGsrPf7TQeW-XFBN5RF7h1cHvUmCScVEE0PhamEPs-uLam9aCYjL_laNJs-0Rflmr_P4CPuVq7fj_gd7TMijMmgg6W7zfbHgFlO0aBrhzUVX7tTl1jPjtnEQ10mRWWHPp-TsgE9_iNw9MRw4bRSGKiMA5LQ=="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Sam Altman和Greg Brockman被看到回到OpenAI总部。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFVi1b_Q9FxI2pF9GBidRnlq3Sh1AvY8CRYdjg_wKrufdUXa0FB1ZfOwfll7M1dEqa2K9JNUwIz7WT4dMXZuHzcxr6WWSpyaWmLbvf5YGZzj2Ppvq2-MetBqsPr8mQDJUiivDu7TPQ6mfjyYsrjg4ePdO-XzUigJdvojdIaoMuDRjsghbvjYWToHBZ1kQtI_8wYGRmhNg1ySbsEO2exVZj24JP5wozAaKgWs4QUTPTP9os="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="Meta" class="tabcontent">
+            <h2 class="text-2xl font-semibold mt-4 mb-2">Meta (Yann LeCun)</h2>
+            <ul>
+                <li>
+                    <p>Yann LeCun将于年底离职Meta，创立一家新的AI创业公司，专注于高级机器智能。Meta将成为新公司的合作伙伴。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGLR7qKpFbm97zsPyl8bqZ2n1nFodRKW2QFNTNx4rhSOhGogicgVYxc83X-XEiyi74vCp4YeWsj0dwsacwe5sAKsb3LWuOKBwua5rlXaJ9gjHmMVdZc66N3WGOga8SP4wbeF5-uw1cCi3k8agXomEer4994st72zkBlxEPH7ZxcpW-Z_tueSkNA1w53CmUPfobB_wZuhsrUu0_F1F4NLf7HRak="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>据报道，LeCun与Meta内部其他人发生冲突，并且由于Meta更加关注构建与OpenAI等竞争对手竞争的模型，LeCun在Meta的项目难以获得资源。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEo0eNunajFdodYVjhPCaAFXlb2lUlLrKOvxN4TRcIX2IyZJgNA_lpaVErh41D2fwRc475MZ9U0mHxWA0THgrdgsCGprNgMT0tqbLAAOKKF_rLxMHymQu9hMzygu-Zg1P-2MWIc6HnfKY6sByiTjKfr3gdVRC2naej8XuwwKrv8lhpFY4H0RgB_okxOeHI4qma3v9iO_SZry9S54xr3qfzCjQdn"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="Anthropic" class="tabcontent">
+            <h2 class="text-2xl font-semibold mt-4 mb-2">Anthropic (Dario Amodei)</h2>
+            <ul>
+                <li>
+                    <p>Dario Amodei警告说，如果没有护栏，AI可能会走上危险的道路。他预测AI可能会在未来五年内消灭一半的入门级白领工作。</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbzjoqDawuwgLDihGyE7VRwzp3AIgQHfzDnq5ipvqAFxgTAzKMbMyyu5TYVi8rKvNBjjAJdHHRcGQDp1ja3dXVXI9TWmunXmzTBMz3D-9J-BANDvcAT4q4xG1BN4j5dg8x57tqX7NDlEmEq3ieCsDQImAw9o6HXmNBet3pJ4uc2LwINQ=="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Dario Amodei对少数科技公司CEO决定AI的未来深感不安。</p>
+                     <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQE5HY0kMDjBWqXO8cHu4aXAxNTw-Uw6kuN4NyNJFOayh5El8AnPlHTiJ6zuNZnDaF9Ien6I_nyU6oFFUn-u858YssVVppI7oKHpzFVOnXiRgtdECaVI7FAdVd33Xwmgr2_QxDtahwdfPlGq1WgtOtRZu4k3DsLqV4Udzj-8vMYWtDXzTp52Qdx2GIeO7MVm2qB4raLDRAYYQAG1N6udsNEphAkO8LurCYIFr2yqx-sPPCt-Le8dgTa6PZvpzfXiOL3hzhwxEHePpKpi98ZeT4KWv1dYFOMDDMISReF30xzuvil8Vitac2zKUM1MhxyAkCyedzMNRP17prsjRPP-NeuMB3nnp8zvUgD33cViPLSl"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Anthropic致力于提升美国在AI领域的领导地位。</p>
+                     <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFi9IUmI0sP7h0bv-je6Aff5TrkRKFX1NqAydOXSkA1slS5O1JnjOW9RIltgRng1JgDkOCBYz2uQ3i_O9-VN07PUHhaIcfTL9gSERPyOqSA0y0BG7Of_dGkJ0v0Ir7INHbWnEe0OFFPfKT8ai45WxS2_wUtbUqRTYknsylBa5sVrkgruv2rLg=="
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+                <li>
+                    <p>Anthropic CEO认为AI公司必须公开其产品带来的风险，否则可能会重蹈烟草和鸦片公司的覆辙。</p>
+                     <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEdCireUDNsCGo2lBBFCAg9UA_VYOtLYBxXWDxsk9v-rczavGe_a59VPknhsdGQPuUUhCkKSw3c_G4skUL9U1IMJrK2J_TYZahoUm332niBJFBb8zIQ5Re-9fYP6nlYwj9PgNksEJ-cee8LFDsCUfMqdMgKHlOEmFIo65M1ghGiPQqb-xC6-FNNGZNmX20vAeLaad_ZpR93M6FVD8afy-ZArartY_HQX2A71tFUSdpSHRsK"
+                        target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">查看更多</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>

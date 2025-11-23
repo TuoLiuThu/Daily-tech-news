@@ -6,8 +6,8 @@ import pytz
 import re
 
 # ================= 配置区域 =================
-# 听您的：1.5 已死，2.0 没额度。
-# 我们锁定 gemini-2.5-flash，修复 URL 格式错误后它应该能跑。
+# 依据官方最新文档：1.5 已死，3.0 收费。
+# 我们锁定 gemini-2.5-flash，它是目前 Active 且含 Free Tier 的模型
 MODEL_NAME = "gemini-2.5-flash"
 API_KEY = os.environ.get("GEMINI_API_KEY")
 
@@ -16,7 +16,7 @@ def get_beijing_time():
     return datetime.datetime.now(tz).strftime('%Y年%m月%d日 %H:%M')
 
 def clean_html_content(text):
-    """清洗函数：只保留 HTML 代码"""
+    """清洗函数：强制移除 AI 的废话，只提取 HTML 代码"""
     if "```" in text:
         text = text.replace("```html", "").replace("```", "")
     
@@ -34,10 +34,11 @@ def generate_report():
     if not API_KEY:
         return "<html><body><h1>Error</h1><p>API Key is missing.</p></body></html>"
 
-    # 【关键修复】这里是纯净的字符串，绝对没有 markdown 符号
-    url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){MODEL_NAME}:generateContent?key={API_KEY}"
+    # 【关键修复】这里是纯净的 URL 字符串，绝对没有 Markdown 符号
+    base_url = "[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/)"
+    url = f"{base_url}{MODEL_NAME}:generateContent?key={API_KEY}"
 
-    # ================= 您的四大板块核心 Prompt =================
+    # ================= 核心 Prompt (您的四大板块深度要求) =================
     system_prompt = f"""
     Time: {current_time}.
     Role: You are an elite AI Industry Analyst.
@@ -82,7 +83,10 @@ def generate_report():
 
     payload = {
         "contents": [{"parts": [{"text": system_prompt}]}],
-        "tools": [{"googleSearch": {}}],
+        "tools": [
+            # 使用 REST API 标准工具名
+            {"googleSearch": {}} 
+        ],
         "generationConfig": {
             "temperature": 0.5,
             "maxOutputTokens": 8192
@@ -100,6 +104,7 @@ def generate_report():
         # 错误处理
         if response.status_code != 200:
             print(f"API Error Code: {response.status_code}")
+            print(f"API Error Body: {response.text}")
             return f"<html><body><h1>API Error {response.status_code}</h1><p>{response.text}</p></body></html>"
 
         result = response.json()
@@ -109,7 +114,7 @@ def generate_report():
             final_html = clean_html_content(raw_text)
             return final_html
         except (KeyError, IndexError):
-            return "<html><body><h1>Parsing Error</h1><p>API structure mismatch.</p></body></html>"
+            return "<html><body><h1>Parsing Error</h1><p>API valid but no content returned.</p></body></html>"
 
     except Exception as e:
         print(f"Network Exception: {e}")

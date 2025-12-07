@@ -61,34 +61,25 @@ st.markdown('<p class="sub-header">Interview Summarizer - 将访谈录音转换�
 with st.sidebar:
     st.header("⚙️ 设置 / Settings")
     
-    # API Key - Try Streamlit secrets first, then env variable
-    api_key_default = ""
-    try:
-        # Streamlit Cloud secrets
-        api_key_default = st.secrets.get("GEMINI_API_KEY", "")
-    except:
-        pass
+    # API Key - Auto-read from environment or secrets
+    api_key = os.getenv("GEMINI_API_KEY", "")
     
-    if not api_key_default:
-        # Fall back to environment variable
-        api_key_default = os.getenv("GEMINI_API_KEY", "")
-    
-    api_key = st.text_input(
-        "Gemini API Key", 
-        value=api_key_default, 
-        type="password",
-        help="输入您的 Gemini API 密钥 / Enter your Gemini API Key"
-    )
-    
+    # Try Streamlit secrets if env not set
     if not api_key:
-        st.warning("⚠️ 请输入 Gemini API Key")
-        st.stop()
+        try:
+            api_key = st.secrets.get("GEMINI_API_KEY", "")
+        except:
+            pass
     
-    try:
-        configure_gemini(api_key)
-        st.success("✅ API 已配置")
-    except Exception as e:
-        st.error(f"❌ 配置失败: {e}")
+    if api_key:
+        try:
+            configure_gemini(api_key)
+            st.success("✅ API 已配置 (从环境变量读取)")
+        except Exception as e:
+            st.error(f"❌ 配置失败: {e}")
+            st.stop()
+    else:
+        st.error("❌ 请设置环境变量 GEMINI_API_KEY")
         st.stop()
     
     st.markdown("---")

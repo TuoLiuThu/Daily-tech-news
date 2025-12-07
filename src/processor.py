@@ -61,8 +61,8 @@ def analyze_interview(file_path, language="zh"):
     # 1. Upload File
     uploaded_file = upload_file_to_gemini(file_path)
     
-    # 2. Select Model
-    model = genai.GenerativeModel(model_name="gemini-1.5-pro")
+    # 2. Select Model (gemini-2.0-flash-exp is current available model)
+    model = genai.GenerativeModel(model_name="gemini-2.0-flash-exp")
     
     # 3. Construct Prompts
     results = {}

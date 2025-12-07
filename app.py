@@ -61,11 +61,21 @@ st.markdown('<p class="sub-header">Interview Summarizer - 将访谈录音转换�
 with st.sidebar:
     st.header("⚙️ 设置 / Settings")
     
-    # API Key
-    api_key_env = os.getenv("GEMINI_API_KEY")
+    # API Key - Try Streamlit secrets first, then env variable
+    api_key_default = ""
+    try:
+        # Streamlit Cloud secrets
+        api_key_default = st.secrets.get("GEMINI_API_KEY", "")
+    except:
+        pass
+    
+    if not api_key_default:
+        # Fall back to environment variable
+        api_key_default = os.getenv("GEMINI_API_KEY", "")
+    
     api_key = st.text_input(
         "Gemini API Key", 
-        value=api_key_env if api_key_env else "", 
+        value=api_key_default, 
         type="password",
         help="输入您的 Gemini API 密钥 / Enter your Gemini API Key"
     )

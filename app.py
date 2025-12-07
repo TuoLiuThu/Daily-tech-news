@@ -176,8 +176,8 @@ if 'results' in st.session_state:
         st.download_button(
             "⬇️ 下载纪要",
             results.get("summary", ""),
-            file_name=f"{filename}_summary.md",
-            mime="text/markdown"
+            file_name=f"{filename}_summary.txt",
+            mime="text/plain"
         )
     
     with tab_mindmap:
@@ -220,8 +220,8 @@ if 'results' in st.session_state:
         st.download_button(
             "⬇️ 下载完整报告",
             report,
-            file_name=f"{filename}_report.md",
-            mime="text/markdown",
+            file_name=f"{filename}_report.txt",
+            mime="text/plain",
             type="primary"
         )
 
